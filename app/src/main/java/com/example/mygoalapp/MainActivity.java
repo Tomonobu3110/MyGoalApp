@@ -50,14 +50,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i("MainActivity", "requestCode : " + requestCode + " / resultCode : " + resultCode);
 
-        Gson gson = new Gson();
-        Type goalType = new TypeToken<Goal>() {}.getType();
         if (requestCode == REQUEST_CODE_FROM_MAIN && resultCode == RESULT_OK) {
             String new_goal_json = data.getStringExtra("goal_json");
             Log.i("MainActivity", new_goal_json);
 
             // json to object (Goal)
-            goalList.add(gson.fromJson(new_goal_json, goalType));
+            goalList.add(Goal.fromJson(new_goal_json));
             goalAdapter.notifyDataSetChanged(); // リストビューの更新
         }
         else if (requestCode == REQUEST_CODE_FROM_ADAPTER && resultCode == RESULT_OK) {
@@ -67,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MainActivity", updated_goal_json);
 
                 // json to object (Goal)
-                Goal goal = gson.fromJson(updated_goal_json, goalType);
-                goalList.set(index, goal);
+                goalList.set(index, Goal.fromJson(updated_goal_json));
                 goalAdapter.notifyDataSetChanged();
             }
         }

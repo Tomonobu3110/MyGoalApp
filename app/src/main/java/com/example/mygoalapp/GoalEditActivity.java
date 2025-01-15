@@ -39,9 +39,7 @@ public class GoalEditActivity extends AppCompatActivity {
         mGoalIndex = intent.getIntExtra("index", -1);
 
         if (0 <= mGoalIndex && null != mGoalJson) {
-            Gson gson = new Gson();
-            Type goalType = new TypeToken<Goal>() {}.getType();
-            Goal goal = gson.fromJson(mGoalJson, goalType);
+            Goal goal = Goal.fromJson(mGoalJson);
             goalEditText.setText(goal.goal);
             for (String action : goal.actions) {
                 EditText newAction = new EditText(this);
@@ -110,7 +108,7 @@ public class GoalEditActivity extends AppCompatActivity {
         // MainActivityにnewGoalをjson文字列にして返す
         Intent resultIntent = new Intent();
         resultIntent.putExtra("index", mGoalIndex);
-        resultIntent.putExtra("goal_json", gson.toJson(newGoal));
+        resultIntent.putExtra("goal_json", newGoal.getJson());
         setResult(RESULT_OK, resultIntent);
         finish();  // 画面を閉じる
     }

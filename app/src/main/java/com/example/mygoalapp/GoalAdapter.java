@@ -37,9 +37,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, GoalEditActivity.class);
             intent.putExtra("index", position);
-            Gson gson = new Gson();
-            String goal_json = gson.toJson(goal);
-            intent.putExtra("goal_json", goal_json);
+            intent.putExtra("goal_json", goal.getJson());
             ((Activity)context).startActivityForResult(intent, MainActivity.REQUEST_CODE_FROM_ADAPTER);
         });
     }
