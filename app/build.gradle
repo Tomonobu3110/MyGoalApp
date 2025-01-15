@@ -26,6 +26,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // 競合するリソースの除外設定を追加
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -34,7 +42,15 @@ dependencies {
     implementation libs.material
     implementation libs.constraintlayout
 
+    // for json
     implementation 'com.google.code.gson:gson:2.10.1'
+
+    // for Google Drive
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation 'com.google.http-client:google-http-client-android:1.43.3'
+    implementation 'com.google.http-client:google-http-client-jackson2:1.43.3'
+    implementation 'com.google.api-client:google-api-client-android:1.33.0'
+    implementation 'com.google.apis:google-api-services-drive:v3-rev197-1.25.0'
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit

@@ -26,8 +26,8 @@ public class Goal {
     }
 
     public static Goal fromJson(String json) {
-            Gson gson = new Gson();
-            Type goalType = new TypeToken<Goal>() {}.getType();
-            return gson.fromJson(json, goalType);
+        Gson gson = new Gson();
+        Type goalType = new TypeToken<Goal>() {}.getType();
+        return gson.fromJson(json, goalType);
     }
 }
