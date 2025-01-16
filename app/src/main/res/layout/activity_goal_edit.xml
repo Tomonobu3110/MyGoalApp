@@ -12,6 +12,7 @@
         <EditText
             android:id="@+id/goalEditText"
             android:hint="目標"
+            android:background="@android:color/holo_orange_light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
