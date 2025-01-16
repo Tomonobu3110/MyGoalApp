@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_marginBottom="72dp" />
 
     <!-- FloatingActionButton (Add Goal) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -20,20 +21,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_input_add"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Sign In Button (Right Bottom) -->
-    <Button
-        android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"/> <!-- FloatingActionButtonと重ならないようにマージン設定 -->
+
+    <!-- Sign In Button (Left Bottom) -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="116dp"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/loadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="復帰"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"/>
 
 </RelativeLayout>
