@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -42,39 +44,51 @@ public class GoalEditActivity extends AppCompatActivity {
             Goal goal = Goal.fromJson(mGoalJson);
             goalEditText.setText(goal.goal);
             for (String action : goal.actions) {
-                EditText newAction = new EditText(this);
-                newAction.setText(action);
-                actionsLayout.addView(newAction);
+                addEditableField(actionsLayout, action);
             }
             for (String purpose : goal.purposes) {
-                EditText newPurpose = new EditText(this);
-                newPurpose.setText(purpose);
-                purposesLayout.addView(newPurpose);
+                addEditableField(purposesLayout, purpose);
             }
-            for (String high_purpose : goal.higherPurposes) {
-                EditText newHigherPurpose = new EditText(this);
-                newHigherPurpose.setText(high_purpose);
-                higherPurposesLayout.addView(newHigherPurpose);
+            for (String highPurpose : goal.higherPurposes) {
+                addEditableField(higherPurposesLayout, highPurpose);
             }
         }
     }
 
     public void addPurpose(View view) {
-        EditText newPurpose = new EditText(this);
-        purposesLayout.addView(newPurpose);
-        newPurpose.requestFocus();
+        addEditableField(purposesLayout, "");
     }
 
     public void addAction(View view) {
-        EditText newAction = new EditText(this);
-        actionsLayout.addView(newAction);
-        newAction.requestFocus();
+        addEditableField(actionsLayout, "");
     }
 
     public void addHigherPurpose(View view) {
-        EditText newHigherPurpose = new EditText(this);
-        higherPurposesLayout.addView(newHigherPurpose);
-        newHigherPurpose.requestFocus();
+        addEditableField(higherPurposesLayout, "");
+    }
+
+    /**
+     * EditTextを長押しで削除できるようにするカスタムメソッド
+     */
+    private void addEditableField(LinearLayout layout, String text) {
+        EditText newEditText = new EditText(this);
+        newEditText.setText(text);
+        layout.addView(newEditText);
+        newEditText.requestFocus();
+
+        // ✅ 長押しで削除のダイアログ表示
+        newEditText.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setTitle("削除確認")
+                    .setMessage("この項目を削除しますか？")
+                    .setPositiveButton("YES", (dialog, which) -> {
+                        layout.removeView(newEditText);
+                        Toast.makeText(this, "削除しました", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("NO", null)
+                    .show();
+            return true;
+        });
     }
 
     public void saveGoal(View view) {
