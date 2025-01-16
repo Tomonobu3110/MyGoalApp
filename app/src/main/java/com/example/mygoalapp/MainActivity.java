@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // for Google Drive (Save)
+        // for Google Drive (Save & Load)
         else if (requestCode == REQUEST_CODE_SAVE_JSON || requestCode == REQUEST_CODE_LOAD_JSON)  {
             Log.i("MainActivity", "Sign In Result");
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -241,21 +241,6 @@ public class MainActivity extends AppCompatActivity {
             } // end of run()
         }); // end of executor.execute()
     } // end of function of saveJsonToGoogleDrive()
-
-    public void loadJsonFromGoogleDrive(GoogleSignInAccount account) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "JSON loaded from Google Drinve", Toast.LENGTH_SHORT).show();
-                    }
-                }); // end of runOnUiThread()
-            } // end of run()
-        }); // end of executor.execute()
-    } // end of function of loadJsonFromGoogleDrive()
 
     public void loadLatestJsonFromGoogleDrive(GoogleSignInAccount account) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
